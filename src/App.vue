@@ -1,6 +1,6 @@
 <template>
   <div class="ctr">
-    <questions v-if="questionsAnswered < questions.length" :questions="questions" :questionsAnswered="questionsAnswered" @question-answered="questionsAnsweredMethod()" />
+    <questions v-if="questionsAnswered < questions.length" :questions="questions" :questionsAnswered="questionsAnswered" @question-answered="handleAnswer()" />
     <result v-else />
     <button type="button" class="reset-btn">Reset</button>
   </div>
@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     // is_correct parameter is received from emit event in Questions.vue
-    questionsAnsweredMethod(is_correct) {
+    handleAnswer(is_correct) {
       if (is_correct) {
         this.totalCorrect++;
       }
