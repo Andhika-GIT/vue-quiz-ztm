@@ -1,6 +1,6 @@
 <template>
   <div class="ctr">
-    <questions v-if="questionsAnswered < questions.length" :questions="questions" :questionsAnswered="questionsAnswered" @question-answered="handleAnswer()" />
+    <questions v-if="questionsAnswered < questions.length" :questions="questions" :questionsAnswered="questionsAnswered" @question-answered="handleAnswer" />
     <result v-else :results="results" :totalCorrect="totalCorrect" />
     <button v-if="questionsAnswered === questions.length" type="button" class="reset-btn" @click.prevent="reset">Reset</button>
   </div>
@@ -100,8 +100,10 @@ export default {
     // is_correct parameter is received from emit event in Questions.vue
     handleAnswer(is_correct) {
       if (is_correct) {
+        console.log(is_correct);
         this.totalCorrect++;
       }
+
       // increment questionsAnswered to change the question in Questions component
       this.questionsAnswered++;
     },
