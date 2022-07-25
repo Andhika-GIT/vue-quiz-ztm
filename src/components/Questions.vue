@@ -2,7 +2,7 @@
   <div class="questions-ctr">
     <div class="progress">
       <div class="bar"></div>
-      <div class="status">{{ questionsAnswered }} out of 3 questions answered</div>
+      <div class="status">{{ questionsAnswered }} out of {{ questions.length }} questions answered</div>
     </div>
     <div class="single-question" v-for="(question, index) in questions" :key="question.q" v-show="questionsAnswered === index">
       <div class="question">{{ question.q }}</div>
