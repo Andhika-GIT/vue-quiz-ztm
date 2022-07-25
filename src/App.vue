@@ -1,6 +1,6 @@
 <template>
   <div class="ctr">
-    <questions v-if="questionsAnswered < questions.length" :questions="questions" :questionsAnswered="questionsAnswered" />
+    <questions v-if="questionsAnswered < questions.length" :questions="questions" :questionsAnswered="questionsAnswered" @question-answered="questionsAnsweredMethod()" />
     <result v-else />
     <button type="button" class="reset-btn">Reset</button>
   </div>
@@ -17,7 +17,8 @@ export default {
   },
   data() {
     return {
-      questionsAnswered: 0,
+      questionsAnswered: 0, // to track question in Questions component
+      totalCorrect: 0,
       questions: [
         {
           q: 'What is 2 + 2?',
@@ -94,6 +95,16 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    // is_correct parameter is received from emit event in Questions.vue
+    questionsAnsweredMethod(is_correct) {
+      if (is_correct) {
+        this.totalCorrect++;
+      }
+      // increment questionsAnswered to change the question in Questions component
+      this.questionsAnswered++;
+    },
   },
 };
 </script>

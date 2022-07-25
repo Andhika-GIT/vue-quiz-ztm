@@ -6,7 +6,7 @@
     </div>
     <div class="single-question" v-for="(question, index) in questions" :key="question.q" v-show="questionsAnswered === index">
       <div class="question">{{ question.q }}</div>
-      <div class="answers" v-for="answer in question.answers" :key="answer.text">
+      <div class="answers" v-for="answer in question.answers" :key="answer.text" @click.prevent="selectAnswer(answer.is_correct)">
         <div class="answer">{{ answer.text }}</div>
       </div>
     </div>
@@ -15,6 +15,11 @@
 <script>
 export default {
   props: ['questions', 'questionsAnswered'],
+  methods: {
+    selectAnswer(is_correct) {
+      this.$emit('question-answered', is_correct);
+    },
+  },
 };
 </script>
 <style lang=""></style>
