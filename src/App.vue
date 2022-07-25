@@ -2,7 +2,7 @@
   <div class="ctr">
     <questions v-if="questionsAnswered < questions.length" :questions="questions" :questionsAnswered="questionsAnswered" @question-answered="handleAnswer()" />
     <result v-else :results="results" :totalCorrect="totalCorrect" />
-    <button type="button" class="reset-btn">Reset</button>
+    <button v-if="questionsAnswered === questions.length" type="button" class="reset-btn" @click.prevent="reset">Reset</button>
   </div>
 </template>
 <script>
@@ -104,6 +104,9 @@ export default {
       }
       // increment questionsAnswered to change the question in Questions component
       this.questionsAnswered++;
+    },
+    reset() {
+      (this.questionsAnswered = 0), (this.totalCorrect = 0);
     },
   },
 };
