@@ -1,7 +1,7 @@
 <template lang="">
   <div class="questions-ctr">
     <div class="progress">
-      <div class="bar"></div>
+      <div class="bar" :style="progressBar"></div>
       <div class="status">{{ questionsAnswered }} out of {{ questions.length }} questions answered</div>
     </div>
     <div class="single-question" v-for="(question, index) in questions" :key="question.q" v-show="questionsAnswered === index">
@@ -18,6 +18,14 @@ export default {
   methods: {
     selectAnswer(is_correct) {
       this.$emit('question-answered', is_correct);
+    },
+  },
+  computed: {
+    // bind style for bar
+    progressBar() {
+      return {
+        width: `${(this.questionsAnswered / this.questions.length) * 100}%`,
+      };
     },
   },
 };
